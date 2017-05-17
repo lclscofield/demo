@@ -1,0 +1,106 @@
+/* css reset */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ul{
+    list-style: none;
+}
+body{
+    max-width: 960px;
+    margin: 0 auto;
+    background: #efefef;
+}
+
+/* header */
+header{
+    text-align: center;
+}
+header .avatar{
+    width: 73px;
+    height: 73px;
+    margin-top: 54px;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #999;
+}
+header .avatar:hover{
+    cursor: pointer;
+    box-shadow: 0 0 5px #555;
+}
+header .tags{
+    margin-top: 41px;
+}
+header .tags > span{
+    background: #ddd;
+    width: 128px;
+    display: inline-block;
+    margin: 0 16px;
+    border-radius: 3px;
+}
+header .tags > span:hover{
+    cursor: pointer;
+    box-shadow: 0 0 3px #555;
+}
+@media (max-width: 426px){
+    header .tags{
+        margin-top: 17px;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+    header .tags > span{
+        margin-top: 24px;
+    }
+}
+
+/* summary*/
+section.summary{
+    margin-top: 35px;
+    text-align: center;
+    background: #ddd;
+    padding-top: 75px;
+    padding-bottom: 83px;
+}
+section.summary h2{
+    margin-bottom: 35px;
+}
+section.summary h2 > span{
+    border-radius: 14px;
+}
+section.summary p{
+    margin-bottom: 19px;
+}
+section.summary p > span{
+    border-radius: 14px;
+}
+
+/* album*/
+section.album{
+
+}
+section.album ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 42px;
+    margin-bottom: -6px;
+}
+section.album ul > li{
+    margin-bottom: 32px;
+    max-width: 288px;
+}
+section.album img{
+    width: 288px;
+    height: 300px;
+    border-radius: 3px;
+}
+section.album img:hover{
+    cursor: pointer;
+    box-shadow: 0 0 3px #555;
+}
+section.album h3{
+    margin-top: 19px;
+    margin-bottom: 14px;
+    border-radius: 4px;
+}
