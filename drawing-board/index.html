@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    body {
+      overflow: hidden;
+      background: #ddd;
+    }
+
+    .controller {
+      height: 30px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .controller>li>img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .controller>li.action>img {
+      width: 30px;
+      height: 30px;
+    }
+
+    #canvas {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <ul class="controller">
+    <li class="pen"><img src="C:\Users\LCL\Desktop\git\demo\drawing-board\images\8d0abe72d23e10c4056fa979022e819f.png" alt=""></li>
+    <li class="eraser"><img src="C:\Users\LCL\Desktop\git\demo\drawing-board\images\c1359af23fc2fdc54b22c384a22afb8c.png" alt=""></li>
+    <li class="save"><img src="C:\Users\LCL\Desktop\git\demo\drawing-board\images\save.png" alt=""></li>
+    <li class="empty"><img src="C:\Users\LCL\Desktop\git\demo\drawing-board\images\trash.png" alt=""></li>
+  </ul>
+  <canvas id="canvas"></canvas>
+  <script>
+    let controller = document.querySelector('.controller')
+    let childs = controller.childNodes
+    controller.addEventListener('click', function (e) {
+      let event = e.target
+      for (let i = 0; i < childs.length; i++) {
+        if (childs[i].nodeType === 1) {
+          childs[i].classList.remove('action')
+        }
+      }
+      if (event.parentNode.className === 'pen' || event.parentNode.className === 'eraser')
+        event.parentNode.classList.add('action')
+    })
+
+    let canvas = document.querySelector('#canvas')
+    canvas.width = document.documentElement.clientWidth
+    canvas.height = document.documentElement.clientHeight
+
+    let context = canvas.getContext('2d')
+    let previousPoint
+
+    canvas.addEventListener('touchmove', function (e) {
+      e.preventDefault()
+      let penType = document.querySelector('.action').className
+      let {
+        pageX,
+        pageY
+      } = e.touches[0]
+      if (penType === 'pen action') {
+        if (previousPoint) {
+          context.fillStyle = 'white'
+          context.strokeStyle = 'blue'
+          context.beginPath()
+          context.moveTo(previousPoint.pageX, previousPoint.pageY - 30)
+          context.lineTo(pageX, pageY - 30)
+          context.stroke()
+        }
+        previousPoint = {
+          pageX, //"pageX" = pageX
+          pageY //"pageY" = pageY
+        }
+      } else if (penType === 'eraser action') {
+        context.clearRect(pageX - 5, pageY - 35, 20, 20)
+      }
+    })
+
+    canvas.addEventListener('touchend', function () {
+      previousPoint = null
+    })
+
+    let save = document.querySelector('.save')
+    save.addEventListener('click', function () {
+      var canvas = document.getElementById("canvas")
+      var data = canvas.toDataURL("image/png")
+      var newWindow = window.open('about:blank', 'image from canvas')
+      newWindow.document.write("<img src='" + data + "' alt='from canvas'/>")
+    })
+
+    let empty = document.querySelector('.empty')
+    empty.addEventListener('click', function () {
+      context.clearRect(0, 0, canvas.width, canvas.height)
+    })
+  </script>
+</body>
+
+</html>

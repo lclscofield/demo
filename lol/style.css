@@ -1,0 +1,167 @@
+/* ---全局配置--- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*::before {
+  box-sizing: border-box;
+}
+
+*::after {
+  box-sizing: border-box;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+.clearFix {
+  zoom: 1;
+}
+
+.clearFix::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+
+/* ---顶栏--- */
+
+.topbarWrapper {
+  background: #000;
+}
+
+.topbar {
+  width: 1240px;
+  margin: auto;
+  color: white;
+  position: relative;
+}
+
+.topbar .logo {
+  background: transparent url(http://ossweb-img.qq.com/images/lol/v2/spr-v2.png) no-repeat 0 -30px;
+  width: 190px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+/* ---顶栏导航--- */
+
+.topbar .globalNavigation {
+  float: left;
+  margin-left: 190px;
+}
+
+.topbar .globalNavigation .menu>li {
+  float: left;
+  font-size: 18px;
+  width: 120px;
+  text-align: center;
+  padding: 21px 0;
+}
+
+.topbar .globalNavigation .menu>li>span {
+  display: block;
+}
+
+.topbar .globalNavigation .menu>li>small {
+  font-size: 12px;
+}
+
+.topbar .globalNavigation .subMenu.action{
+  display: block;
+}
+
+.topbar .globalNavigation .subMenu {
+  display: none;
+  position: absolute;
+}
+
+.topbar .globalNavigation .subMenu>ul>li {
+  text-align: center;
+  float: left;
+  width: 120px;
+}
+
+.topbar .globalNavigation .subMenu>ul>li>a {
+  display: block;
+}
+
+.topbarWrapper .topbarShadow {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 300px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.topbarWrapper .topbarShadow.action{
+  display: block;
+}
+
+/* ---顶栏图标--- */
+
+.topbar .icons {
+  float: left;
+  padding: 20px;
+}
+
+.topbar .icons>a {
+  margin: 0 10px;
+}
+
+.topbar .icons>a.search {
+  background: transparent url(http://ossweb-img.qq.com/images/lol/v2/spr-v2.png) no-repeat -8px 0;
+  width: 27px;
+  height: 27px;
+  display: inline-block;
+}
+
+.topbar .icons>a.mobile {
+  background: transparent url(http://ossweb-img.qq.com/images/lol/v2/spr-v2.png) no-repeat -45px 0;
+  width: 21px;
+  height: 27px;
+  display: inline-block;
+}
+
+
+/* ---顶栏用户导航--- */
+
+.topbar .userNavigation {
+  float: left;
+}
+
+.topbar .userNavigation .userIcon {
+  width: 74px;
+  height: 74px;
+  position: relative;
+  padding-top: 4px;
+  padding-left: 4px;
+  float: left;
+}
+
+.topbar .userNavigation .userIcon .mask {
+  width: 74px;
+  height: 74px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: transparent url(http://ossweb-img.qq.com/images/lol/v2/spr-v2.png) no-repeat 0 -167px;
+}
+
+.topbar .userNavigation .userText {
+  float: left;
+}
+
+.topbar .userNavigation .popover {
+  display: none;
+}
