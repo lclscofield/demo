@@ -34,8 +34,7 @@
     }
 
     .controller>li.action>img {
-      width: 30px;
-      height: 30px;
+      transform: scale(1.2);
     }
 
     #canvas {
@@ -71,6 +70,7 @@
     canvas.height = document.documentElement.clientHeight
 
     let context = canvas.getContext('2d')
+    context.globalCompositeOperation = 'xor'
     let previousPoint
 
     canvas.addEventListener('touchmove', function (e) {
