@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+body {
+  background: #ddd;
+}
+
+.clearFix::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+h2 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+
+/* Tab组件 */
+
+.tabs-container {
+  margin: 30px auto;
+  width: 500px;
+}
+
+.tabs>li {
+  float: left;
+  padding: 0.3em 1em;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.tabs>li.active {
+  border-bottom: 2px solid #555;
+}
+
+.tabs-content {
+  margin-top: 15px;
+}
+
+.tabs-content>li {
+  border: 1px solid #555;
+  min-height: 200px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.tabs-content>li.active {
+  display: flex;
+}
+
+
+/* 轮播组件 */
+
+.carousel {
+  margin: 30px auto;
+  width: 500px;
+}
+
+.carousel>.window {
+  overflow: hidden;
+}
+
+.carousel>.window>ul {
+  display: flex;
+  transition: transform 1s;
+}
+
+.carousel>.window>ul>li {
+  flex-shrink: 0;
+  min-height: 200px;
+  width: 500px;
+  background: #555;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel>.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel>.controls>li {
+  display: block;
+  border-radius: 2px;
+  margin: 20px 5px;
+  background: #999;
+  width: 40px;
+  height: 4px;
+  cursor: pointer;
+}
+
+.carousel>.controls>li.active {
+  background: #222;
+}
