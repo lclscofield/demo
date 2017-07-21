@@ -32,6 +32,7 @@ body {
 
 .page {
   max-width: 1920px;
+  overflow: hidden;
   margin: 0 auto;
 }
 
@@ -278,16 +279,16 @@ a {
 /* banner */
 
 .banner-wrapper {
-  max-width: 1380px;
+  height: 350px;
   position: relative;
+  width: 1240px;
   margin: 0 auto;
 }
 
 #banner {
-  position: relative;
   width: 1240px;
-  margin-left: auto;
-  margin-right: auto;
+  position: relative;
+  margin: 0 auto;
   height: 350px;
 }
 
@@ -296,17 +297,23 @@ a {
 
 .banner-wrapper .banner-bg {
   position: absolute;
-  width: 100%;
-  height: 350px;
-  z-index: -1;
+  width: 1920px;
+  margin-left: -340px;
 }
 
 .banner-wrapper .banner-bg>video {
-  margin-left: -270px;
+  z-index: -1;
+  height: 350px;
 }
 
 
 /* banner-text */
+
+#banner .banner-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
 #banner .banner-text>h2 {
   font-size: 50px;
