@@ -32,7 +32,6 @@ body {
 
 .page {
   max-width: 1920px;
-  overflow: hidden;
   margin: 0 auto;
 }
 
@@ -279,9 +278,9 @@ a {
 /* banner */
 
 .banner-wrapper {
-  height: 350px;
-  position: relative;
-  width: 1240px;
+  max-width: 1920px;
+  min-width: 1240px;
+  overflow: hidden;
   margin: 0 auto;
 }
 
@@ -295,7 +294,13 @@ a {
 
 /* banner-bg */
 
-.banner-wrapper .banner-bg {
+.banner-wrapper .banner-bg-wrapper {
+  position: relative;
+  width: 1240px;
+  margin: 0 auto;
+}
+
+.banner-wrapper .banner-bg-wrapper>.banner-bg {
   position: absolute;
   width: 1920px;
   margin-left: -340px;
