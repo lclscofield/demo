@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AJAX</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="loginForm" action="/login" method="GET">
+    <div>
+      <label>
+      用户名
+      <input name="username" type="text">
+      <span class="errorMessage">错误提示</span>
+      </label>
+    </div>
+    <div>
+      <label>
+      密　码
+      <input name="password" type="password">
+      <span class="errorMessage">错误提示</span>
+      </label>
+    </div>
+    <div>
+      <input type="submit">
+    </div>
+  </form>
+
+  <script>
+    loginForm.addEventListener('submit', function (e) {
+      e.preventDefault()
+      let username = loginForm.username.value
+      let password = loginForm.password.value
+      console.log(username, password)
+      let request = new XMLHttpRequest()
+      request.onload = function () {
+        alert('Hello AJAX')
+      }
+      request.open('GET', '/login') //`/login?username=${username}&password=${password}`
+      request.send('Hello AJAX')
+    })
+  </script>
+</body>
+
+</html>
