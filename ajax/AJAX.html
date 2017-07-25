@@ -43,8 +43,10 @@
       let password = loginForm.password.value
       console.log(username, password)
       let request = new XMLHttpRequest()
-      request.onload = function () {
-        alert('Hello AJAX')
+      request.onreadystatechange = function () {
+        if (request.readyState === 4) {
+          console.log('响应下载完毕')
+        }
       }
       request.open('GET', '/login') //`/login?username=${username}&password=${password}`
       request.send('Hello AJAX')
