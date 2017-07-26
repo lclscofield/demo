@@ -3,7 +3,7 @@ var fs = require('fs');
 var url = require('url');
 
 //console.log(Object.keys(http))
-var port = process.env.PORT || 8888;
+var port = process.env.PORT || 8080;
 
 var server = http.createServer(function (request, response) {
 
@@ -15,7 +15,7 @@ var server = http.createServer(function (request, response) {
   //从这里开始看，上面不要看
   if (method === 'GET') {
     if (path === '/') { // 如果用户请求的是 / 路径
-      var string = fs.readFileSync('./index.html');
+      var string = fs.readFileSync('./ajax.html');
       response.setHeader('Content-Type', 'text/html;charset=utf-8');
       response.end(string)
     } else if (path === '/style.css') {
@@ -42,7 +42,7 @@ var server = http.createServer(function (request, response) {
 
         if (username.trim() === '') {
           errors['username'] = '用户名不能为空'
-        } else if (username === 'wang') {
+        } else if (username === 'lcl') {
           if (password === '') {
             errors['password'] = '密码不能为空'
           } else if (password !== '123123') {
@@ -51,11 +51,13 @@ var server = http.createServer(function (request, response) {
         } else {
           errors['username'] = '用户名不存在'
         }
-        if (password !== '') {} else errors['password'] = '密码不能为空';
+        if (password === '') {
+          errors['password'] = '密码不能为空'
+        }
 
         if (Object.keys(errors).length <= 0) {
           response.statusCode = 200;
-          response.end('欢迎登录' + '' + username)
+          response.end(`${username}，欢迎登录`)
         } else {
           response.statusCode = 412;
           var string = JSON.stringify({

@@ -12,6 +12,19 @@
       justify-content: center;
       align-items: center;
     }
+
+    input.error {
+      border-color: red;
+    }
+
+    .errorMessage {
+      display: none;
+    }
+
+    input.error+.errorMessage {
+      color: red;
+      display: inline;
+    }
   </style>
 </head>
 
@@ -36,23 +49,49 @@
     </div>
   </form>
 
+  <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
   <script>
     loginForm.addEventListener('submit', function (e) {
       e.preventDefault()
       let username = loginForm.username.value
       let password = loginForm.password.value
-      console.log(username, password)
+      let valid = true
+      $('input.error').removeClass('error')
+
+      if (username.trim() === '') {
+        $('input[name="username"]').addClass('error')
+          .next('.errorMessage').text('用户名不能为空')
+        valid = false
+      }
+      if (password === '') {
+        $('input[name="password"]').addClass('error')
+          .next('.errorMessage').text('密码不能为空')
+        valid = false
+      }
+      if (valid === false) {
+        return
+      }
+
       let request = new XMLHttpRequest()
       request.onreadystatechange = function () {
         if (request.readyState === 4) {
           if (request.status >= 400) {
-            console.log('提交失败')
+            console.log(JSON.parse(request.responseText))
+            let {
+              errors
+            } = JSON.parse(request.responseText)
+
+            for (let key in errors) {
+              let value = errors[key]
+              $(`input[name="${key}"]`).addClass('error')
+                .next('.errorMessage').text(value)
+            }
           } else {
-            console.log('提交成功')
+            alert(request.responseText)
           }
         }
       }
-      request.open('POST', '/login') //`/login?username=${username}&password=${password}`
+      request.open('POST', loginForm.action) //`/login?username=${username}&password=${password}`
       request.send(`username=${username}&password=${password}`)
     })
   </script>
