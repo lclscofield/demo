@@ -26,7 +26,6 @@ img {
 
 body {
   font-size: 12px;
-  background: #000;
   color: white;
 }
 
@@ -62,8 +61,11 @@ a {
 
 /* topbar */
 
-.topbar-wrapper {
+.topbar-bg {
   background: #000;
+}
+
+.topbar-wrapper {
   width: 1240px;
   margin: 0 auto;
   position: relative;
@@ -398,4 +400,45 @@ a {
   color: #f5d185;
   border-image: linear-gradient(to bottom, #6b5024 0%, #b88d35 100%);
   border-image-slice: 1;
+}
+
+
+/* menu */
+
+.menu {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  border-top: 2px solid #8c6c2d;
+  background: url('http://ossweb-img.qq.com/images/lol/v2/spr-v2.png') repeat-x 0 -257px;
+}
+
+.menu ul {
+  height: 60px;
+  width: 1240px;
+  margin: 0 auto;
+}
+
+.menu .dot {
+  width: 13px;
+  height: 50px;
+  margin: 5px 18px;
+  background: url('http://ossweb-img.qq.com/images/lol/v2/spr-v2.png') no-repeat -290px -30px;
+}
+
+.menu li {
+  font-size: 20px;
+  float: left;
+  width: 110px;
+  height: 60px;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  line-height: 58px;
+  text-align: center;
+  color: #555555;
+}
+
+.menu .cur {
+  color: #d1ab57;
+  border-bottom: 2px solid #d1ab57;
 }
