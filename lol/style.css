@@ -413,6 +413,12 @@ a {
   background: url('http://ossweb-img.qq.com/images/lol/v2/spr-v2.png') repeat-x 0 -257px;
 }
 
+.fix-menu {
+  position: fixed;
+  top: 0;
+  z-index: 10;
+}
+
 .menu ul {
   height: 60px;
   width: 1240px;
