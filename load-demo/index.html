@@ -25,7 +25,7 @@
 
     #list {
       max-width: 680px;
-      margin: 0 auto;
+      margin: 20px auto;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -70,7 +70,7 @@
 
     .loadMore>.btn:hover {
       box-shadow: 0 0 5px blue;
-    }    
+    }
   </style>
 </head>
 
@@ -78,7 +78,7 @@
   <ul id="list">
   </ul>
   <div class="loadMore">
-    <span id="loadMoreButton" class="btn">加载更多</span>
+    <button id="loadMoreButton" class="btn">加载更多</button>
   </div>
 
   <script>
@@ -88,13 +88,55 @@
       let div = document.createElement('div')
       div.className = 'wrapper'
       let img = document.createElement('img')
-      img.src = '//via.placeholder.com/200x200?text=' + Math.random().toFixed(2) * 100
+      img.src = '//via.placeholder.com/200x200?text=' + Math.random().toFixed(5)
       div.appendChild(img)
       let p = document.createElement('p')
       p.textContent = `这是第 ${i+1} 段话`
       li.appendChild(div)
       li.appendChild(p)
       list.appendChild(li)
+    }
+
+    let n = 1
+
+    function load() {
+      let request = new XMLHttpRequest()
+      request.open('GET', `./page-${n+1}.json`) // 加载后一页
+      request.onload = function () {
+        n += 1
+        let response = request.responseText
+        // JSON.parse 输入符合 JSON 语法的字符串，输出 JSON 对应的数据 array/object/number/string
+        let data = JSON.parse(response)
+        for (let i = 0; i < data.content.length; i++) {
+          let liString =
+            `
+            <li>
+            <div class=wrapper>
+              <img src='${data.content[i].url + Math.random().toFixed(5)}'>
+            </div>
+            <p>${data.content[i].text}</p>
+            </li>
+            `
+          list.insertAdjacentHTML('beforeend', liString)
+        }
+        if (data.hasNextPage === false) {
+          loadMoreButton.disabled = true
+          loadMoreButton.textContent = '没有下一页了'
+        }
+      }
+      request.send()
+    }
+
+    loadMoreButton.onclick = load // 点击加载下一页
+
+    window.onscroll = function () {
+      let doc = document.documentElement
+      let top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
+      let clientHeight = doc.clientHeight
+      let buttonToTop = loadMoreButton.getBoundingClientRect().top
+      if (buttonToTop <= clientHeight && loadMoreButton.disabled === false) {
+        load()
+      }
     }
   </script>
 </body>
