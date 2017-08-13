@@ -33,7 +33,7 @@
       height: 20px;
     }
 
-    .controller>li.action>img {
+    .controller>li.active>img {
       transform: scale(1.2);
     }
 
@@ -54,34 +54,34 @@
   <script>
     let controller = document.querySelector('.controller')
     let childs = controller.childNodes
-    controller.addEventListener('click', function (e) {
+    controller.addEventListener('click', function (e) { // 添加事件委托，点击图标变大
       let event = e.target
       for (let i = 0; i < childs.length; i++) {
-        if (childs[i].nodeType === 1) {
-          childs[i].classList.remove('action')
+        if (event.parentNode.className === 'pen' || event.parentNode.className === 'eraser') {
+          event.parentNode.classList.add('active')
+        } else {
+          childs[i].classList.remove('active')
         }
       }
-      if (event.parentNode.className === 'pen' || event.parentNode.className === 'eraser')
-        event.parentNode.classList.add('action')
     })
 
-    let canvas = document.querySelector('#canvas')
+    let canvas = document.querySelector('#canvas') // 创建画板
     canvas.width = document.documentElement.clientWidth
     canvas.height = document.documentElement.clientHeight
 
-    let context = canvas.getContext('2d')
+    let context = canvas.getContext('2d') // 创建 canvas 画笔
     context.globalCompositeOperation = 'xor'
-    let previousPoint
+    let previousPoint // 创建一个保存前一个点的变量
 
-    canvas.addEventListener('touchmove', function (e) {
+    canvas.addEventListener('touchmove', function (e) { // 画笔滑动事件
       e.preventDefault()
-      let penType = document.querySelector('.action').className
+      let penType = document.querySelector('.active').className
       let {
         pageX,
         pageY
       } = e.touches[0]
-      if (penType === 'pen action') {
-        if (previousPoint) {
+      if (penType === 'pen active') { // 画笔被选中时才触发
+        if (previousPoint) { // 判断前一个点是否存在
           context.fillStyle = 'white'
           context.strokeStyle = 'blue'
           context.beginPath()
@@ -89,21 +89,21 @@
           context.lineTo(pageX, pageY - 30)
           context.stroke()
         }
-        previousPoint = {
+        previousPoint = { // 保存前一个点
           pageX, //"pageX" = pageX
           pageY //"pageY" = pageY
         }
-      } else if (penType === 'eraser action') {
+      } else if (penType === 'eraser active') {
         context.clearRect(pageX - 5, pageY - 35, 20, 20)
       }
     })
 
-    canvas.addEventListener('touchend', function () {
+    canvas.addEventListener('touchend', function () { // 画笔位置重置
       previousPoint = null
     })
 
     let save = document.querySelector('.save')
-    save.addEventListener('click', function () {
+    save.addEventListener('click', function () { // 将画的图保存为图片
       var canvas = document.getElementById("canvas")
       var data = canvas.toDataURL("image/png")
       var newWindow = window.open('about:blank', 'image from canvas')
@@ -111,7 +111,7 @@
     })
 
     let empty = document.querySelector('.empty')
-    empty.addEventListener('click', function () {
+    empty.addEventListener('click', function () { // 删除整个画板上的图
       context.clearRect(0, 0, canvas.width, canvas.height)
     })
   </script>
