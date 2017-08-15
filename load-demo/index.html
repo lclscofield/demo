@@ -82,6 +82,9 @@
   </div>
 
   <script>
+    let loadingImage = new Image()
+    loadingImage.src = '//media.giphy.com/media/y1ZBcOGOOtlpC/200.gif'
+
     let list = document.querySelector('#list')
     for (var i = 0; i < 9; i++) {
       let li = document.createElement('li')
@@ -98,11 +101,16 @@
     }
 
     let n = 1
+    let loading = false
 
     function load() {
+      if (loading === true) {
+        return
+      }
       let request = new XMLHttpRequest()
       request.open('GET', `./page-${n+1}.json`) // 加载后一页
       request.onload = function () {
+        loading = false
         n += 1
         let response = request.responseText
         // JSON.parse 输入符合 JSON 语法的字符串，输出 JSON 对应的数据 array/object/number/string
@@ -112,7 +120,7 @@
             `
             <li>
             <div class=wrapper>
-              <img src='${data.content[i].url + Math.random().toFixed(5)}'>
+              <img src='//media.giphy.com/media/y1ZBcOGOOtlpC/200.gif' data-load='${data.content[i].url + Math.random().toFixed(5)}'>
             </div>
             <p>${data.content[i].text}</p>
             </li>
@@ -124,6 +132,7 @@
           loadMoreButton.textContent = '没有下一页了'
         }
       }
+      loading = true
       request.send()
     }
 
@@ -134,8 +143,17 @@
       let top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
       let clientHeight = doc.clientHeight
       let buttonToTop = loadMoreButton.getBoundingClientRect().top
-      if (buttonToTop <= clientHeight && loadMoreButton.disabled === false) {
+      if (buttonToTop <= clientHeight - 50 && loadMoreButton.disabled === false) {
         load()
+      }
+
+      let images = document.querySelectorAll('img[data-load]')
+      for (let i = 0; i < images.length; i++) {
+        let imageToTop = images[i].getBoundingClientRect().top
+        if (imageToTop <= clientHeight) {
+          images[i].src = images[i].getAttribute('data-load')
+          images[i].removeAttribute('data-load')
+        }
       }
     }
   </script>
