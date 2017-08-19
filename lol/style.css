@@ -458,3 +458,55 @@ a {
   margin-top: -20px;
   background: #f7f7f7 url('http://ossweb-img.qq.com/images/lol/v2/bg-content-top.jpg') no-repeat center top;
 }
+
+.content .content-inner {
+  width: 1240px;
+  margin: 0 auto;
+}
+
+
+/* 轮播 S */
+
+.content .slide {
+  float: left;
+  height: 400px;
+  margin-right: 20px;
+  margin-bottom: 60px;
+}
+
+.content .slide>.slide-img {
+  width: 820px;
+  height: 350px;
+  overflow: hidden;
+}
+
+.content .slide>.slide-img>ul {
+  width: 4100px;
+  transition: transform .3s;
+}
+
+.content .slide>.slide-img li {
+  float: left;
+}
+
+.content .slide img {
+  width: 820px;
+  height: 350px;
+}
+
+.content .slide>.slide-controls li {
+  float: left;
+  font-size: 14px;
+  color: #c8c8c8;
+  width: 164px;
+  height: 50px;
+  line-height: 50px;
+  cursor: pointer;
+  text-align: center;
+  background: #121112;
+}
+
+.content .slide>.slide-controls .active {
+  color: #e9c06c;
+  background: #303030;
+}
