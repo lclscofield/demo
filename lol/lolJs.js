@@ -10,7 +10,6 @@ $(function () {
 })
 
 //slide
-
 $(function () {
   $('.slide').on('mouseover', '.slide-controls li', function (e) {
     let $li = $(e.currentTarget)
