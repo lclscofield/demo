@@ -107,7 +107,7 @@
       var canvas = document.getElementById("canvas")
       var data = canvas.toDataURL("image/png")
       var newWindow = window.open('about:blank', 'image from canvas')
-      newWindow.document.write("<img src='" + data + "' alt='from canvas'/>")
+      newWindow.document.write("<img src='" + data + "' alt='from canvas' style='background-color:#ddd;'/>")
     })
 
     let empty = document.querySelector('.empty')
