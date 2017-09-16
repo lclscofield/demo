@@ -3,7 +3,7 @@
 let tabsNode = document.querySelector('.tabs')
 let tabs = tabsNode.children
 let tabsContent = document.querySelectorAll('.tabs-content>li')
-tabsNode.addEventListener('mouseover', function (e) { //mouseover可以换成click点击事件
+tabsNode.addEventListener('mouseover', function (e) { // mouseover 可以换成 click 点击事件
   // while (tab.tagName !== 'LI') { //点击事件优化
   //   if (tab === tabs) {
   //     tab = null
@@ -33,7 +33,23 @@ controlsNode.addEventListener('click', function (e) {
   }
   let index = e.target.index
   roll(index)
+  currentIndex = index // 使当前鼠标移入的索引成为定时器索引
+  // 鼠标移入时清除定时器,再重新开启定时器，保证定时器与鼠标移入事件不发生冲突
+  clearInterval(si)
+  si = setInterval(ni, 5000)
 })
+
+let currentIndex = 0
+let si = setInterval(ni, 5000) // 设置定时器
+
+function ni() { // 定时触发循环函数
+  let nextIndex = currentIndex + 1
+  if (nextIndex === 5) {
+    nextIndex = 0
+  }
+  roll(nextIndex)
+  currentIndex = nextIndex
+}
 
 function roll(index) {
   let winWidth = win.clientWidth
@@ -46,13 +62,3 @@ function roll(index) {
     }
   }
 }
-
-let current = 0
-setInterval(function () {
-  let nextIndex = current + 1
-  if (nextIndex === 3) {
-    nextIndex = 0
-  }
-  roll(nextIndex)
-  current = nextIndex
-}, 3000)
